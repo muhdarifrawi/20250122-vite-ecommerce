@@ -103,14 +103,16 @@ function ServiceForm() {
                     <select className="form-select my-3" 
                     aria-label="select service type" 
                     name="serviceTypeId" onChange={handleFormChange} required>
-                        <option defaultValue>Select service type</option>
+                        <option >Select service type</option>
                         {   !serviceForm["serviceType"] ? "" :
                             serviceForm["serviceType"].map((obj) => {
-                                
+                                console.log(obj.service_type_id == serviceForm.service.service_id);
                                 return (
                                     <option id={obj.service_type_id} 
                                     value={obj.service_type_id}
-                                    key={obj.service_type_id}>
+                                    key={obj.service_type_id}
+                                    defaultValue={obj.service_type_id == serviceForm.service.service_id ? true : ""}
+                                    >
                                         {obj.name}
                                     </option>
                                 )
