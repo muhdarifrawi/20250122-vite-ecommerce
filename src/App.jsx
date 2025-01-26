@@ -8,6 +8,8 @@ import ProductTable from "./ProductTable";
 import ProductForm from "./ProductForm";
 import ServiceForm from "./ServiceForm";
 import ServiceTable from "./ServiceTable";
+import ItemTable from "./ItemTable";
+import ItemForm from "./ItemForm";
 
 function App() {
   return (
@@ -22,6 +24,9 @@ function App() {
         <Route path="/servicetable" component={ServiceTable}/>
         <Route path="/serviceform" component={ServiceForm}/>
         <Route path="/serviceform/:id" component={ServiceForm}/>
+        <Route path="/itemtable" component={ItemTable}/>
+        <Route path="/itemform" component={ItemForm}/>
+        <Route path="/itemform/:id" component={ItemForm}/>
       </Switch>                                               
     </>
   )
