@@ -15,18 +15,21 @@ function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link active" aria-current="page" href="/">Home</Link>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link className="nav-link" href="/products">Products</Link>
+                            </li> */}
+                            <li className="nav-item">
+                                <Link className="nav-link" href="/servicetable">Service Table</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" href="/producttable">Product Table</Link>
+                                <Link className="nav-link" href="/itemtable">Item Table</Link>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Link className="nav-link" href="/cart">Cart</Link>
-                            </li>
-                            <li className="nav-item">
+                            </li> */}
+                            {/* <li className="nav-item">
                                 <Link className="nav-link" href="#">Login</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

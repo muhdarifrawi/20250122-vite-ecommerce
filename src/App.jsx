@@ -10,6 +10,7 @@ import ServiceForm from "./ServiceForm";
 import ServiceTable from "./ServiceTable";
 import ItemTable from "./ItemTable";
 import ItemForm from "./ItemForm";
+import ItemDelete from "./ItemDelete";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/itemtable" component={ItemTable}/>
         <Route path="/itemform" component={ItemForm}/>
         <Route path="/itemform/:id" component={ItemForm}/>
+        <Route path="/itemdelete/:id" component={ItemDelete}/>
       </Switch>                                               
     </>
   )

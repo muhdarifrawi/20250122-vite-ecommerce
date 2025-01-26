@@ -25,6 +25,10 @@ function ItemTable() {
         navigate(`/itemform/${id}`, { replace: true });
     }
 
+    const handleDelete = async (id) => {
+        navigate(`/itemdelete/${id}`, { replace: true });
+    }
+
     return (
         <>
             <main className="container my-5">
@@ -53,7 +57,7 @@ function ItemTable() {
                                         <td>{!item["brand"]["name"] ? " --- NA --- ": item["brand"]["name"]}</td>
                                         <td>
                                             <button className="btn btn-success mx-2" type="button" onClick={() => handleEdit(item["item"]["item_id"])}>Edit</button>
-                                            <button className="btn btn-danger mx-2" type="button">Delete</button>
+                                            <button className="btn btn-danger mx-2" type="button"onClick={() => handleDelete(item["item"]["item_id"])}>Delete</button>
                                         </td>
                                     </tr>
                                 )
