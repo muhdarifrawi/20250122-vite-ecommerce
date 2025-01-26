@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "wouter";
 
@@ -6,15 +6,26 @@ function ServiceForm() {
 
     const [serviceForm, setServiceForm] = useState([]);
     const [submitService, setSubmitService] = useState([]);
-    
+    const [isEditing, setEditing] = useState(false);
+
     const params = useParams();
 
     console.log(params.id);
 
     useEffect(() => {
         const fetchServiceForm = async () => {
+            let endpoint;
+            if (!params.id) {
+                endpoint = "/services/add";
+                console.log("params NOT received");
+            }
+            else {
+                setEditing(true);
+                endpoint = `/services/edit/${params.id}`;
+                console.log("params received");
+            }
             try {
-                const response = await axios.get(import.meta.env.VITE_DB_URL + "/services/add");
+                const response = await axios.get(import.meta.env.VITE_DB_URL + endpoint);
                 setServiceForm(response.data);
                 console.log("service >>>", response.data.serviceType)
                 console.log("serviceForm >>> ", serviceForm)
@@ -55,7 +66,10 @@ function ServiceForm() {
                         <div className="col-auto">
                             <input type="text" id="serviceNameInput" name="serviceNameInput" 
                             className="form-control" aria-describedby="serviceNameHelp" 
-                            value={submitService.serviceNameInput || ""}
+                            value={
+                                isEditing ? !serviceForm.service ? "" :  serviceForm.service.name
+                                : submitService.serviceNameInput || ""
+                            }
                             onChange={handleFormChange}
                             required/>
                         </div>
@@ -73,7 +87,10 @@ function ServiceForm() {
                         <div className="col-auto">
                             <input type="text" id="serviceCostInput" name="serviceCostInput" 
                             className="form-control" aria-describedby="serviceCostHelp" 
-                            value={submitService.serviceCostInput || ""}
+                            value={
+                                isEditing ? !serviceForm.service ? "" : serviceForm.service.cost 
+                                : submitService.serviceCostInput || ""
+                            }
                             onChange={handleFormChange}
                             required/>
                         </div>
