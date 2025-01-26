@@ -49,7 +49,7 @@ function ServiceTable() {
                                         <td>{!service["service"]["name"] ? " --- NA ---": service["service"]["name"]}</td>
                                         <td>${!service["service"]["cost"] ? " --- NA --- ": service["service"]["cost"]}</td>
                                         <td>{!service["serviceType"]["name"] ? " --- NA --- ": service["serviceType"]["name"]}</td>
-                                        <td>${!service["staff"]["name"] ? " --- NA --- ": service["staff"]["name"]}</td>
+                                        <td>{!service["staff"]["name"] ? " --- NA --- ": service["staff"]["name"]}</td>
                                         <td>
                                             <button className="btn btn-success mx-2" type="button" onClick={() => handleEdit(service["service"]["service_id"])}>Edit</button>
                                             <button className="btn btn-danger mx-2" type="button">Delete</button>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "wouter";
+import { navigate } from "wouter/use-browser-location";
 
 function ServiceForm() {
 
@@ -66,7 +67,7 @@ function ServiceForm() {
         .then((response)=>{
             console.log(response);
         });
-
+        navigate(`/servicetable`);
     }
 
     return (
