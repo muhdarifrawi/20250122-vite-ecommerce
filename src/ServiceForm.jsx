@@ -6,6 +6,8 @@ function ServiceForm() {
     const [serviceForm, setServiceForm] = useState([]);
     const [submitService, setSubmitService] = useState([]);
     
+    console.log(this.props);
+
     useEffect(() => {
         const fetchServiceForm = async () => {
             try {

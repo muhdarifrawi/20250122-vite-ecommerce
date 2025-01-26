@@ -21,6 +21,7 @@ function App() {
         <Route path="/productform" component={ProductForm}/>
         <Route path="/servicetable" component={ServiceTable}/>
         <Route path="/serviceform" component={ServiceForm}/>
+        <Route path="/serviceform/:id" component={ServiceForm}/>
       </Switch>                                               
     </>
   )

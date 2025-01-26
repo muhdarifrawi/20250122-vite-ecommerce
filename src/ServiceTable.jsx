@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
+import { navigate } from "wouter/use-browser-location";
 
 function ServiceTable() {
     const [services, setServices] = useState([]);
@@ -10,7 +11,7 @@ function ServiceTable() {
             try {
                 const response = await axios.get(import.meta.env.VITE_DB_URL + "/services");
                 setServices(response.data.services);
-                console.log("services >>>", response.data)
+                // console.log("services >>>", response.data)
             } catch (error) {
                 console.log("[Error]Service fetch error :", error);
             }
@@ -19,7 +20,9 @@ function ServiceTable() {
         fetchAllService();
     }, []);
 
-
+    const handleEdit = async (id) => {
+        navigate(`/serviceform/${id}`, { replace: true });
+    }
 
     return (
         <>
@@ -48,8 +51,8 @@ function ServiceTable() {
                                         <td>{!service["serviceType"]["name"] ? " --- NA --- ": service["serviceType"]["name"]}</td>
                                         <td>${!service["staff"]["name"] ? " --- NA --- ": service["staff"]["name"]}</td>
                                         <td>
-                                            <button class="btn btn-success mx-2" type="button">Edit</button>
-                                            <button class="btn btn-danger mx-2" type="button">Delete</button>
+                                            <button className="btn btn-success mx-2" type="button" onClick={() => handleEdit(service["service"]["service_id"])}>Edit</button>
+                                            <button className="btn btn-danger mx-2" type="button">Delete</button>
                                         </td>
                                     </tr>
                                 )
