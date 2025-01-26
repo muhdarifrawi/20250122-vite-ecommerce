@@ -11,6 +11,7 @@ import ServiceTable from "./ServiceTable";
 import ItemTable from "./ItemTable";
 import ItemForm from "./ItemForm";
 import ItemDelete from "./ItemDelete";
+import ServiceDelete from "./ServiceDelete";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/servicetable" component={ServiceTable}/>
         <Route path="/serviceform" component={ServiceForm}/>
         <Route path="/serviceform/:id" component={ServiceForm}/>
+        <Route path="/servicedelete/:id" component={ServiceDelete}/>
         <Route path="/itemtable" component={ItemTable}/>
         <Route path="/itemform" component={ItemForm}/>
         <Route path="/itemform/:id" component={ItemForm}/>

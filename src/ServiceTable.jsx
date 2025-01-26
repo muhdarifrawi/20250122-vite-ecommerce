@@ -25,6 +25,10 @@ function ServiceTable() {
         navigate(`/serviceform/${id}`, { replace: true });
     }
 
+    const handleDelete = async (id) => {
+            navigate(`/servicedelete/${id}`, { replace: true });
+        }
+
     return (
         <>
             <main className="container my-5">
@@ -53,7 +57,7 @@ function ServiceTable() {
                                         <td>{!service["staff"]["name"] ? " --- NA --- ": service["staff"]["name"]}</td>
                                         <td>
                                             <button className="btn btn-success mx-2" type="button" onClick={() => handleEdit(service["service"]["service_id"])}>Edit</button>
-                                            <button className="btn btn-danger mx-2" type="button">Delete</button>
+                                            <button className="btn btn-danger mx-2" type="button" onClick={() => handleDelete(service["service"]["service_id"])}>Delete</button>
                                         </td>
                                     </tr>
                                 )
