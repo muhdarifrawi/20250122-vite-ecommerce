@@ -6,7 +6,7 @@ function ServiceForm() {
 
     const [serviceForm, setServiceForm] = useState([]);
     const [submitService, setSubmitService] = useState([]);
-    const [isEditing, setEditing] = useState(false);
+    // const [isEditing, setEditing] = useState(false);
 
     const params = useParams();
 
@@ -20,13 +20,18 @@ function ServiceForm() {
                 console.log("params NOT received");
             }
             else {
-                setEditing(true);
                 endpoint = `/services/edit/${params.id}`;
                 console.log("params received");
             }
             try {
                 const response = await axios.get(import.meta.env.VITE_DB_URL + endpoint);
                 setServiceForm(response.data);
+                setSubmitService({
+                    serviceNameInput: response.data.service.name,
+                    serviceCostInput: response.data.service.cost,
+                    serviceTypeId: response.data.service.service_type_id_fk,
+                    staffId: response.data.service.staff_id_fk
+                })
                 console.log("service >>>", response.data.serviceType)
                 console.log("serviceForm >>> ", serviceForm)
             } catch (error) {
@@ -41,13 +46,23 @@ function ServiceForm() {
         const name = event.target.name;
         const value = event.target.value;
         setSubmitService(values => ({...values, [name]: value}))
+        
         console.log(submitService);
     } 
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         console.log(submitService);
-        await axios.post(import.meta.env.VITE_DB_URL + "/services/add", submitService)
+        let endpoint;
+        if (!params.id) {
+            endpoint = "/services/add";
+            console.log("params NOT received");
+        }
+        else {
+            endpoint = `/services/edit/${params.id}`;
+            console.log("params received");
+        }
+        await axios.post(import.meta.env.VITE_DB_URL + endpoint, submitService)
         .then((response)=>{
             console.log(response);
         });
@@ -66,10 +81,7 @@ function ServiceForm() {
                         <div className="col-auto">
                             <input type="text" id="serviceNameInput" name="serviceNameInput" 
                             className="form-control" aria-describedby="serviceNameHelp" 
-                            value={
-                                isEditing ? !serviceForm.service ? "" :  serviceForm.service.name
-                                : submitService.serviceNameInput || ""
-                            }
+                            value={submitService.serviceNameInput || ""}
                             onChange={handleFormChange}
                             required/>
                         </div>
@@ -87,10 +99,7 @@ function ServiceForm() {
                         <div className="col-auto">
                             <input type="text" id="serviceCostInput" name="serviceCostInput" 
                             className="form-control" aria-describedby="serviceCostHelp" 
-                            value={
-                                isEditing ? !serviceForm.service ? "" : serviceForm.service.cost 
-                                : submitService.serviceCostInput || ""
-                            }
+                            value={submitService.serviceCostInput || ""}
                             onChange={handleFormChange}
                             required/>
                         </div>
@@ -103,11 +112,10 @@ function ServiceForm() {
                     <select className="form-select my-3" 
                     aria-label="select service type" 
                     name="serviceTypeId" onChange={handleFormChange} 
-                    value={!serviceForm["service"] ? "" : serviceForm.service.service_type_id_fk} required>
+                    value={submitService.serviceTypeId} required>
                         <option>Select service type</option>
                         {   !serviceForm["serviceType"] ? "" :
                             serviceForm["serviceType"].map((obj) => {
-                                console.log(obj.service_type_id == serviceForm.service.service_id);
                                 return (
                                     <option id={obj.service_type_id} 
                                     value={obj.service_type_id}
@@ -121,8 +129,8 @@ function ServiceForm() {
                     </select>
                     <select className="form-select my-3" aria-label="select staff"
                     name="staffId" onChange={handleFormChange} 
-                    value={!serviceForm["service"] ? "" : serviceForm.service.staff_id_fk} required>
-                        <option defaultValue>Select staff</option>
+                    value={submitService.staffId} required>
+                        <option >Select staff</option>
                         {   !serviceForm["staff"] ? "" :
                             serviceForm["staff"].map((obj) => {
                                 
