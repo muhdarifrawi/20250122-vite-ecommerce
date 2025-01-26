@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "wouter";
 import { navigate } from "wouter/use-browser-location";
+import { Link } from 'wouter';
 
 function ServiceForm() {
 
@@ -73,7 +74,7 @@ function ServiceForm() {
     return (
         <>
             <div className="container">
-                <h1>Service Form</h1>
+                <h1>Service Form<Link role="button" className="btn btn-primary" href="/servicetable">Back</Link></h1>
                 <form onSubmit={handleFormSubmit}>
                     <div className="row g-3 align-items-center my-3">
                         <div className="col-auto">

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import { navigate } from "wouter/use-browser-location";
+import { Link } from 'wouter';
 
 function ServiceTable() {
     const [services, setServices] = useState([]);
@@ -27,7 +28,7 @@ function ServiceTable() {
     return (
         <>
             <main className="container my-5">
-                <h2>Services</h2>
+                <h2>Services <Link role="button" className="btn btn-primary" href="/serviceform">Add</Link></h2>
                 <table className="table table-success table-hover">
                     <thead>
                         <tr>
