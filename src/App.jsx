@@ -5,6 +5,8 @@ import Homepage from "./Homepage";
 import Productpage from "./Productpage";
 import Cartpage from "./Cartpage";
 import ProductTable from "./ProductTable";
+import ProductForm from "./ProductForm";
+import ServiceForm from "./ServiceForm";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/products" component={Productpage} />
         <Route path="/cart" component={Cartpage} />
         <Route path="/producttable" component={ProductTable}/>
+        <Route path="/productform" component={ProductForm}/>
+        <Route path="/serviceform" component={ServiceForm}/>
       </Switch>                                               
     </>
   )
