@@ -1,12 +1,15 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+import { useParams } from "wouter";
 
 function ServiceForm() {
 
     const [serviceForm, setServiceForm] = useState([]);
     const [submitService, setSubmitService] = useState([]);
     
-    console.log(this.props);
+    const params = useParams();
+
+    console.log(params.id);
 
     useEffect(() => {
         const fetchServiceForm = async () => {
