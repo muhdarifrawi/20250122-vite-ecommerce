@@ -102,8 +102,9 @@ function ServiceForm() {
                     </div>
                     <select className="form-select my-3" 
                     aria-label="select service type" 
-                    name="serviceTypeId" onChange={handleFormChange} required>
-                        <option >Select service type</option>
+                    name="serviceTypeId" onChange={handleFormChange} 
+                    value={!serviceForm["service"] ? "" : serviceForm.service.service_type_id_fk} required>
+                        <option>Select service type</option>
                         {   !serviceForm["serviceType"] ? "" :
                             serviceForm["serviceType"].map((obj) => {
                                 console.log(obj.service_type_id == serviceForm.service.service_id);
@@ -111,7 +112,6 @@ function ServiceForm() {
                                     <option id={obj.service_type_id} 
                                     value={obj.service_type_id}
                                     key={obj.service_type_id}
-                                    defaultValue={obj.service_type_id == serviceForm.service.service_id ? true : ""}
                                     >
                                         {obj.name}
                                     </option>
@@ -120,7 +120,8 @@ function ServiceForm() {
                         }
                     </select>
                     <select className="form-select my-3" aria-label="select staff"
-                    name="staffId" onChange={handleFormChange} required>
+                    name="staffId" onChange={handleFormChange} 
+                    value={!serviceForm["service"] ? "" : serviceForm.service.staff_id_fk} required>
                         <option defaultValue>Select staff</option>
                         {   !serviceForm["staff"] ? "" :
                             serviceForm["staff"].map((obj) => {
