@@ -52,7 +52,7 @@ function ItemTable() {
                                     <tr key={item["item"]["item_id"]}>
                                         <th scope="row">{item["item"]["item_id"]}</th>
                                         <td>{!item["item"]["name"] ? " --- NA ---": item["item"]["name"]}</td>
-                                        <td>${!item["item"]["cost"] ? " --- NA --- ": item["item"]["cost"]}</td>
+                                        <td>${!item["item"]["cost"] ? " --- NA --- ": parseFloat(item["item"]["cost"]).toFixed(2)}</td>
                                         <td>{!item["itemType"]["name"] ? " --- NA --- ": item["itemType"]["name"]}</td>
                                         <td>{!item["brand"]["name"] ? " --- NA --- ": item["brand"]["name"]}</td>
                                         <td>

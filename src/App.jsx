@@ -23,6 +23,7 @@ function App() {
         <Route path="/cart" component={Cartpage} />
         <Route path="/producttable" component={ProductTable}/>
         <Route path="/productform" component={ProductForm}/>
+        <Route path="/productform/:id" component={ProductForm}/>
         <Route path="/servicetable" component={ServiceTable}/>
         <Route path="/serviceform" component={ServiceForm}/>
         <Route path="/serviceform/:id" component={ServiceForm}/>

@@ -56,10 +56,10 @@ function ProductTable() {
                                         <th scope="row">{product["product"]["product_id"]}</th>
                                         <td>{!product["product"]["name"] ? " --- NA ---": product["product"]["name"]}</td>
                                         <td>{!product["item"]["name"] ? " --- NA --- ": product["item"]["name"]}</td>
-                                        <td>${!product["item"]["cost"] ? " --- NA --- ": product["item"]["cost"]}</td>
+                                        <td>${!product["item"]["cost"] ? " --- NA --- ": parseFloat(product["item"]["cost"]).toFixed(2)}</td>
                                         <td>{!product["service"]["name"] ? " --- NA --- ": product["service"]["name"]}</td>
-                                        <td>${!product["service"]["cost"] ? " --- NA --- ": product["service"]["cost"]}</td>
-                                        <td>${totalCost}</td>
+                                        <td>${!product["service"]["cost"] ? " --- NA --- ": parseFloat(product["service"]["cost"]).toFixed(2)}</td>
+                                        <td>${parseFloat(totalCost).toFixed(2)}</td>
                                         <td>
                                             <button class="btn btn-success mx-2" type="button">Edit</button>
                                             <button class="btn btn-danger mx-2" type="button">Delete</button>
