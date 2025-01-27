@@ -64,17 +64,17 @@ function ProductForm() {
             endpoint = `/products/edit/${params.id}`;
             console.log("params received");
         }
-        // await axios.post(import.meta.env.VITE_DB_URL + endpoint, submitProduct)
-        // .then((response)=>{
-        //     console.log(response);
-        // });
-        // navigate(`/producttable`);
+        await axios.post(import.meta.env.VITE_DB_URL + endpoint, submitProduct)
+        .then((response)=>{
+            console.log(response);
+        });
+        navigate(`/producttable`);
     }
     return (
         <>
             <div className="container">
                 <form onSubmit={handleFormSubmit}>
-                    <h1>Product Form</h1>
+                    <h1>Product Form <Link role="button" className="btn btn-primary" href="/producttable">Back</Link></h1>
                     <div className="row g-3 align-items-center my-3">
                         <div className="col-auto">
                             <label htmlFor="productNameInput" className="col-form-label">Product Name</label>

@@ -12,6 +12,7 @@ import ItemTable from "./ItemTable";
 import ItemForm from "./ItemForm";
 import ItemDelete from "./ItemDelete";
 import ServiceDelete from "./ServiceDelete";
+import ProductDelete from "./ProductDelete";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/producttable" component={ProductTable}/>
         <Route path="/productform" component={ProductForm}/>
         <Route path="/productform/:id" component={ProductForm}/>
+        <Route path="/productdelete/:id" component={ProductDelete}/>
         <Route path="/servicetable" component={ServiceTable}/>
         <Route path="/serviceform" component={ServiceForm}/>
         <Route path="/serviceform/:id" component={ServiceForm}/>

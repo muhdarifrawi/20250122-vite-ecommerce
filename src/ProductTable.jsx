@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
 import axios from "axios";
+import { navigate } from "wouter/use-browser-location";
+import { Link } from 'wouter';
 
 function ProductTable() {
     const [products, setProducts] = useState([]);
@@ -19,12 +21,19 @@ function ProductTable() {
         fetchAllProducts();
     }, []);
 
+    const handleEdit = async (id) => {
+        navigate(`/productform/${id}`, { replace: true });
+    }
+
+    const handleDelete = async (id) => {
+        navigate(`/productdelete/${id}`, { replace: true });
+    }
 
 
     return (
         <>
             <main className="container my-5">
-                <h2>Product Inventory</h2>
+                <h2>Product Inventory <Link role="button" className="btn btn-primary" href="/productform">Add</Link></h2>
                 <table className="table table-success table-hover">
                     <thead>
                         <tr>
@@ -50,19 +59,19 @@ function ProductTable() {
                             products.map((product) => {
                                 // console.log(">>> ", !product["service"]["name"])
                                 let totalCost = parseFloat(!product["item"]["cost"] ? 0 : product["item"]["cost"]) +
-                                                parseFloat(!product["service"]["cost"] ? 0 : product["service"]["cost"])
+                                    parseFloat(!product["service"]["cost"] ? 0 : product["service"]["cost"])
                                 return (
                                     <tr key={product["product"]["product_id"]}>
                                         <th scope="row">{product["product"]["product_id"]}</th>
-                                        <td>{!product["product"]["name"] ? " --- NA ---": product["product"]["name"]}</td>
-                                        <td>{!product["item"]["name"] ? " --- NA --- ": product["item"]["name"]}</td>
-                                        <td>${!product["item"]["cost"] ? " --- NA --- ": parseFloat(product["item"]["cost"]).toFixed(2)}</td>
-                                        <td>{!product["service"]["name"] ? " --- NA --- ": product["service"]["name"]}</td>
-                                        <td>${!product["service"]["cost"] ? " --- NA --- ": parseFloat(product["service"]["cost"]).toFixed(2)}</td>
+                                        <td>{!product["product"]["name"] ? " --- NA ---" : product["product"]["name"]}</td>
+                                        <td>{!product["item"]["name"] ? " --- NA --- " : product["item"]["name"]}</td>
+                                        <td>${!product["item"]["cost"] ? " --- NA --- " : parseFloat(product["item"]["cost"]).toFixed(2)}</td>
+                                        <td>{!product["service"]["name"] ? " --- NA --- " : product["service"]["name"]}</td>
+                                        <td>${!product["service"]["cost"] ? " --- NA --- " : parseFloat(product["service"]["cost"]).toFixed(2)}</td>
                                         <td>${parseFloat(totalCost).toFixed(2)}</td>
                                         <td>
-                                            <button class="btn btn-success mx-2" type="button">Edit</button>
-                                            <button class="btn btn-danger mx-2" type="button">Delete</button>
+                                            <button className="btn btn-success mx-2" type="button" onClick={() => handleEdit(product["product"]["product_id"])}>Edit</button>
+                                            <button class="btn btn-danger mx-2" onClick={() => handleDelete(product["product"]["product_id"])} type="button">Delete</button>
                                         </td>
                                     </tr>
                                 )
