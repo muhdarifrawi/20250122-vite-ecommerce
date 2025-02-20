@@ -1,7 +1,19 @@
 import React from "react";
 import { Link, useLocation } from 'wouter';
+import { useAuth } from "./AuthContext";
+import axios from "axios";
 
 function Navbar() {
+    const { isLoggedIn, setIsLoggedIn } = useAuth();
+
+    const  handleLogout = async () => {
+        console.log("handle logout : ");
+        await axios.post(import.meta.env.VITE_DB_URL + "/logout")
+        .then((response) => {
+            setIsLoggedIn(false);
+            console.log(response);
+        });
+    }
     return (
         <>
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -11,7 +23,7 @@ function Navbar() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav">
+                        <ul className="navbar-nav me-auto">
                             <li className="nav-item">
                                 <Link className="nav-link active" aria-current="page" href="/">Home</Link>
                             </li>
@@ -34,6 +46,20 @@ function Navbar() {
                                 <Link className="nav-link" href="#">Login</Link>
                             </li> */}
                         </ul>
+                        {isLoggedIn ? (
+                            <ul className="navbar-nav me-2">
+                                <li className="nav-item">
+                                    <span onClick={handleLogout}>Logout</span>
+                                </li>
+                            </ul>
+                        ) : (
+                            <ul className="navbar-nav me-2">
+                                <li className="nav-item">
+                                    <Link className="nav-link" href="/login">Login</Link>
+                                </li>
+                            </ul>
+                        )}
+
                     </div>
                 </div>
             </nav>
