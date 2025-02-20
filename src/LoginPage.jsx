@@ -6,7 +6,7 @@ import { useAuth } from "./AuthContext";
 
 function LoginPage() {
     axios.defaults.withCredentials = true;
-    const { isLoggedIn, setIsLoggedIn } = useAuth();
+    const { isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin } = useAuth();
     const [loginForm, setloginForm] = useState([]);
 
     const handleFormChange = (event) => {
@@ -28,6 +28,10 @@ function LoginPage() {
         })
         .then((response) => {
             setIsLoggedIn(true);
+            if(response.data.staffData){
+                console.log("staff");
+                setIsAdmin(true);
+            }
             console.log(response);
         });
         // navigate(`/products`);

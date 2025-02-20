@@ -4,15 +4,16 @@ import { useAuth } from "./AuthContext";
 import axios from "axios";
 
 function Navbar() {
-    const { isLoggedIn, setIsLoggedIn } = useAuth();
+    const { isLoggedIn, setIsLoggedIn, isAdmin, setIsAdmin } = useAuth();
 
-    const  handleLogout = async () => {
+    const handleLogout = async () => {
         console.log("handle logout : ");
         await axios.post(import.meta.env.VITE_DB_URL + "/logout")
-        .then((response) => {
-            setIsLoggedIn(false);
-            console.log(response);
-        });
+            .then((response) => {
+                setIsLoggedIn(false);
+                setIsAdmin(false);
+                console.log(response);
+            });
     }
     return (
         <>
@@ -33,17 +34,22 @@ function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link" href="/producttable">Product Table</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" href="/servicetable">Service Table</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" href="/itemtable">Item Table</Link>
-                            </li>
+                            {
+                                isAdmin ?
+                                    (
+                                    <>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" href="/servicetable">Service Table</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link className="nav-link" href="/itemtable">Item Table</Link>
+                                        </li>
+                                    </>
+                                    ) : ""
+                            }
+
                             {/* <li className="nav-item">
                                 <Link className="nav-link" href="/cart">Cart</Link>
-                            </li> */}
-                            {/* <li className="nav-item">
-                                <Link className="nav-link" href="#">Login</Link>
                             </li> */}
                         </ul>
                         {isLoggedIn ? (
